@@ -89,8 +89,7 @@ class App extends Component {
             let value = this.state.value && this.state.isOperationAllowed === true ? this.state.value.toString() + e : e;
             this.setState({
                 value: value,
-                isOperationAllowed: true,
-                allValuesTemporary: this.state.allValuesTemporary.concat(value)
+                isOperationAllowed: true
             })
         } else if (e === 'dot') {
             const value = this.state.value.toString();
@@ -118,7 +117,7 @@ class App extends Component {
                     this.setState({
                         value: newValue,
                         oldValue: newValue,
-                        allValuesTemporary: this.state.allValuesTemporary.concat('+')
+                        allValuesTemporary: this.state.allValuesTemporary.concat('+' + this.state.value)
                     });
                     break;
                 case 'minus':
@@ -126,7 +125,7 @@ class App extends Component {
                     this.setState({
                         value: newValue,
                         oldValue: newValue,
-                        allValuesTemporary: this.state.allValuesTemporary.concat('-')
+                        allValuesTemporary: this.state.allValuesTemporary.concat('-' + this.state.value)
                     });
                     break;
                 case 'multiplication':
@@ -134,7 +133,7 @@ class App extends Component {
                     this.setState({
                         value: newValue,
                         oldValue: newValue,
-                        allValuesTemporary: this.state.allValuesTemporary.concat('*')
+                        allValuesTemporary: this.state.allValuesTemporary.concat('*' + this.state.value)
                     });
                     break;
                 case 'divide':
@@ -142,7 +141,7 @@ class App extends Component {
                     this.setState({
                         value: newValue,
                         oldValue: newValue,
-                        allValuesTemporary: this.state.allValuesTemporary.concat('/')
+                        allValuesTemporary: this.state.allValuesTemporary.concat('/' + this.state.value)
                     });
                     break;
                 default:
@@ -151,6 +150,7 @@ class App extends Component {
         } else {
             this.setState({
                 oldValue: this.state.value,
+                allValuesTemporary: this.state.allValuesTemporary.concat(this.state.value)
             });
         }
 
@@ -170,8 +170,6 @@ class App extends Component {
         setTimeout(() => {
             this.setState(state => {
                 let allValues = state.allValuesTemporary;
-
-                allValues = allValues.slice(0, -1);
                 allValues = allValues.concat('=' + this.state.value);
 
                 return {
