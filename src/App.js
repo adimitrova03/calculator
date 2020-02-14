@@ -61,20 +61,22 @@ class App extends Component {
      * @name localStorageUpdated
      */
     localStorageUpdated() {
-        let calculatorValues = JSON.parse(localStorage.getItem('calculatorValues'));
+        if (localStorage.getItem('calculatorValues')) {
+            let calculatorValues = JSON.parse(localStorage.getItem('calculatorValues'));
 
-        this.setState({
-            value: calculatorValues.value,
-            oldValue: calculatorValues.oldValue,
-            isOperationAllowed: calculatorValues.isOperationAllowed,
-            memory: calculatorValues.memory,
-            showMemoryList: calculatorValues.showMemoryList,
-            showList: calculatorValues.showList,
-            allValues: calculatorValues.allValues,
-            allValuesTemporary: calculatorValues.allValuesTemporary,
-            operation: calculatorValues.operation
+            this.setState({
+                value: calculatorValues.value,
+                oldValue: calculatorValues.oldValue,
+                isOperationAllowed: calculatorValues.isOperationAllowed,
+                memory: calculatorValues.memory,
+                showMemoryList: calculatorValues.showMemoryList,
+                showList: calculatorValues.showList,
+                allValues: calculatorValues.allValues,
+                allValuesTemporary: calculatorValues.allValuesTemporary,
+                operation: calculatorValues.operation
 
-        });
+            });
+        }
     }
 
     /**
